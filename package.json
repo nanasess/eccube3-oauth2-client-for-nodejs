@@ -1,7 +1,7 @@
 {
-  "name": "express-4.x-openidconnect-example",
+  "name": "eccube3-oauth2-client-for-nodejs",
   "version": "0.0.0",
-  "description": "Express 4.x app using Passport for authentication via OpenID Connect.",
+  "description": "EC-CUBE3 using Passport for authentication via OAuth2.0.",
   "keywords": [
     "example",
     "express",
@@ -26,6 +26,7 @@
     "express-session": "^1.11.3",
     "morgan": "^1.6.1",
     "passport": "^0.2.2",
-    "passport-openidconnect": "^0.0.1"
+    "passport-oauth2": "^1.3.0",
+    "randomstring": "^1.1.4"
   }
 }

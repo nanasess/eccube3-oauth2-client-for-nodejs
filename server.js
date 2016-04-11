@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
-var Strategy = require('passport-openidconnect').Strategy;
+var Strategy = require('passport-oauth2').Strategy;
+var randomstring = require("randomstring");
 
 
 // Configure the Twitter strategy for use by Passport.
@@ -11,11 +12,12 @@ var Strategy = require('passport-openidconnect').Strategy;
 // with a user object, which will be set at `req.user` in route handlers after
 // authentication.
 passport.use(new Strategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    authorizationURL: 'https://login0.myauth0.com/i/oauth2/authorize',
-    tokenURL: 'https://login0.myauth0.com/oauth/token',
-    callbackURL: 'http://localhost:3000/callback'
+    clientID: "<Client ID>",
+    clientSecret: "<Client secret>",
+    authorizationURL: 'https://<eccube-host>/admin/OAuth2/v0/authorize',
+    tokenURL: 'https://<eccube-host>/OAuth2/v0/token',
+    callbackURL: 'http://127.0.0.1:3000/callback',
+    scope: ['read', 'write']
   },
   function(token, tokenSecret, profile, cb) {
     // In this example, the user's Twitter profile is supplied as the user
@@ -77,10 +79,10 @@ app.get('/login',
   });
 
 app.get('/login/idp',
-  passport.authenticate('openidconnect'));
+  passport.authenticate('oauth2', { state: randomstring.generate() }));
 
-app.get('/callback', 
-  passport.authenticate('openidconnect', { failureRedirect: '/login' }),
+app.get('/callback',
+  passport.authenticate('oauth2', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
   });
