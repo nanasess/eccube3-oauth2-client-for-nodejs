@@ -17,7 +17,7 @@ passport.use(new Strategy({
     authorizationURL: 'https://<eccube-host>/admin/OAuth2/v0/authorize',
     tokenURL: 'https://<eccube-host>/OAuth2/v0/token',
     callbackURL: 'http://127.0.0.1:3000/callback',
-    scope: ['read', 'write']
+    scope: ['product_read', 'product_write']
   },
   function(token, tokenSecret, profile, cb) {
     // In this example, the user's Twitter profile is supplied as the user
